@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minha Lista de Tarefas</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+    <div class="minhaLista">
+    <h1 class="titulo">Minha Lista de Tarefas</h1>
+
+    <input id="meuInput" type="text" placeholder="Digite uma Tarefa">
+    <button onclick="adicionar()">Adicionar</button>
+
+    <ul id="lista"></ul>
+    </div>
+
+
+</body>
+
+<script>
+let tarefas = [];
+
+// salvar no localStorage
+function salvarTarefas() {
+    localStorage.setItem("tarefas", JSON.stringify(tarefas));
+}
+
+// criar elemento na tela
+function criarElementoNaTela(text) {
+    const li = document.createElement("li");
+
+    const span = document.createElement("span");
+    span.textContent = text;
+
+    const btnEditar = document.createElement("button");
+    btnEditar.textContent = "Editar";
+
+    const btnRemover = document.createElement("button");
+    btnRemover.textContent = "Remover";
+
+    li.appendChild(span);
+    li.appendChild(document.createTextNode(" "));
+    li.appendChild(btnEditar);
+    li.appendChild(document.createTextNode(" "));
+    li.appendChild(btnRemover);
+
+    document.getElementById("lista").appendChild(li);
+
+    //  marcar como concluída
+    span.addEventListener("click", function() {
+        span.classList.toggle("concluida");
+    });
+
+    // remover tarefa
+    btnRemover.addEventListener("click", function() {
+        li.remove();
+
+        tarefas = tarefas.filter(t => t !== text);
+        salvarTarefas();
+    });
+
+    // editar tarefa = atualizado para nao ser pelo prompt, e sim um input que substitui o span
+    btnEditar.addEventListener("click", function() {
+        // Cria um input para edição
+        const input = document.createElement("input");
+        input.type = "text";
+        input.value = span.textContent;
+        input.style.padding = "8px";
+        input.style.borderRadius = "8px";
+        input.style.border = "2px solid #6c63ff";
+        input.style.backgroundColor = "#0f0f1a";
+        input.style.color = "white";
+        input.style.fontSize = "14px";
+        
+        // Substitui o span pelo input
+        const textoAntigo = span.textContent;
+        li.replaceChild(input, span);
+        
+        // Foca no input
+        input.focus();
+        
+        // Função para salvar a edição
+        function salvarEdicao() {
+            const novoTexto = input.value.trim();
+            
+            if (novoTexto !== "") {
+                span.textContent = novoTexto;
+                
+                const index = tarefas.indexOf(textoAntigo);
+                if (index !== -1) {
+                    tarefas[index] = novoTexto;
+                    salvarTarefas();
+                }
+                
+                // Atualiza a referência do text para futuras remoções/edições
+                text = novoTexto;
+            }
+            
+            // Volta o span no lugar
+            li.replaceChild(span, input);
+        }
+        
+        // Salvar ao pressionar Enter
+        input.addEventListener("keypress", function(e) {
+            if (e.key === "Enter") {
+                salvarEdicao();
+            }
+        });
+        
+        // Cancelar ao pressionar ESC
+        input.addEventListener("keydown", function(e) {
+            if (e.key === "Escape") {
+                li.replaceChild(span, input);
+            }
+        });
+        
+        // Salvar quando perder o foco (opcional)
+        input.addEventListener("blur", function() {
+            salvarEdicao();
+        });
+    });
+}
+
+//adicionar nova tarefa
+function adicionar() {
+    const input = document.getElementById("meuInput");
+    const text = input.value;
+
+    if (text.trim() === "") return;
+
+    criarElementoNaTela(text);
+
+    tarefas.push(text);
+    salvarTarefas();
+
+    input.value = "";
+}
+
+//carregar ao abrir a página
+function carregarTarefas() {
+    const dados = localStorage.getItem("tarefas"); // vai salvar no armazenamento local do navegador
+
+    if (dados) {
+        tarefas = JSON.parse(dados);
+
+        tarefas.forEach(function(tarefa) {
+            criarElementoNaTela(tarefa);
+        });
+    }
+} // Vai carregar as tarefas salvas no armazenamento local quando a página for carregada
+
+//iniciar
+carregarTarefas();
+</script>
+</body>
+</html>

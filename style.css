@@ -1,0 +1,275 @@
+/* ========== VARIÁVEIS DE ESTILO ========== */
+:root {
+    --fiap-black: #0a0a0a;
+    --fiap-dark: #0f0f1a;
+    --fiap-card: #1a1a2e;
+    --fiap-purple: #6c63ff;
+    --fiap-purple-dark: #5a52d6;
+    --fiap-cyan: #00d2ff;
+    --fiap-pink: #ff6b6b;
+    --fiap-gradient: linear-gradient(135deg, #6c63ff 0%, #00d2ff 100%);
+    --fiap-gradient-hover: linear-gradient(135deg, #5a52d6 0%, #00b8e6 100%);
+    --border-radius-fiap: 16px;
+    --border-radius-fiap-sm: 12px;
+}
+
+/* ========== RESET E CONFIGURAÇÕES GLOBAIS ========== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ========== FUNDO DA PÁGINA ========== */
+body {
+    font-family: 'Inter', 'Segoe UI', 'Poppins', sans-serif;
+    min-height: 100vh;
+    background: var(--fiap-black);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    position: relative;
+}
+
+/* Grid de fundo estilo tecnologia */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(rgba(108, 99, 255, 0.05) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(108, 99, 255, 0.05) 1px, transparent 1px);
+    background-size: 50px 50px;
+    pointer-events: none;
+}
+
+/* ========== CONTAINER PRINCIPAL ========== */
+.minhaLista {
+    max-width: 600px;
+    width: 100%;
+    background: rgba(26, 26, 46, 0.8);
+    backdrop-filter: blur(20px);
+    border-radius: var(--border-radius-fiap);
+    padding: 40px;
+    border: 1px solid rgba(108, 99, 255, 0.2);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 1;
+}
+
+.minhaLista:hover {
+    border-color: rgba(108, 99, 255, 0.5);
+    box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.6);
+}
+
+/* ========== TÍTULO ========== */
+.titulo {
+    text-align: center;
+    margin-bottom: 35px;
+    font-size: 2.5em;
+    font-weight: 800;
+    background: var(--fiap-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+/* ========== INPUT E BOTÃO ADICIONAR ========== */
+#meuInput {
+    width: calc(100% - 130px); /* Ajusta largura considerando o botão */
+    padding: 16px 20px;
+    background: rgba(15, 15, 26, 0.8);
+    border: 2px solid rgba(108, 99, 255, 0.3);
+    border-radius: var(--border-radius-fiap-sm);
+    font-size: 16px;
+    color: #fff;
+    transition: all 0.3s ease;
+    margin-right: 12px; /* Espaço entre input e botão */
+}
+
+#meuInput::placeholder {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+#meuInput:focus {
+    outline: none;
+    border-color: var(--fiap-purple);
+    box-shadow: 0 0 0 4px rgba(108, 99, 255, 0.2);
+    background: rgba(15, 15, 26, 1);
+}
+
+/* Botão Adicionar */
+button[onclick="adicionar()"] {
+    padding: 16px 10px;
+    background: linear-gradient(135deg, #00d2ff 0%, #3a7bd5 100%);
+    min-width: 90px; /* Largura mínima */
+    color: black;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 15px rgba(108, 99, 255, 0.3);
+    vertical-align: top; /* Alinha com o input */
+}
+
+button[onclick="adicionar()"]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(108, 99, 255, 0.5);
+    background: var(--fiap-gradient-hover);
+}
+
+/* ========== LISTA DE TAREFAS ========== */
+#lista {
+    list-style: none;
+    margin-top: 30px;
+}
+
+/* Cada item da lista */
+#lista li {
+    background: linear-gradient(135deg, rgba(26, 26, 46, 0.9) 0%, rgba(15, 15, 26, 0.9) 100%);
+    margin: 15px 0;
+    padding: 18px 20px;
+    border-radius: var(--border-radius-fiap-sm);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid rgba(108, 99, 255, 0.2);
+    transition: all 0.3s ease;
+    animation: slideInUp 0.4s ease;
+    position: relative;
+}
+
+/* Barra lateral ao passar mouse */
+#lista li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 4px;
+    background: var(--fiap-gradient);
+    transform: scaleY(0);
+    transition: transform 0.3s ease;
+}
+
+#lista li:hover::before {
+    transform: scaleY(1);
+}
+
+/* Efeito hover no item */
+#lista li:hover {
+    transform: translateX(8px);
+    border-color: rgba(108, 99, 255, 0.5);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Texto da tarefa */
+#lista li span {
+    flex: 1;
+    font-size: 16px;
+    font-weight: 500;
+    color: #fff;
+    cursor: pointer; /* Indica que pode clicar para concluir */
+    padding: 5px;
+    transition: all 0.2s ease;
+}
+
+#lista li span:hover {
+    transform: scale(1.02);
+    padding-left: 10px;
+}
+
+/* ========== BOTÕES DE EDITAR E REMOVER ========== */
+/* ESTILO PARA AMBOS OS BOTÕES */
+#lista li button {
+    padding: 10px 24px; /* Aumentado o padding horizontal */
+    border: none;
+    border-radius: 50px !important;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    margin-left: 15px; /* ESPAÇO ENTRE OS BOTÕES - MUDE AQUI */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Primeiro botão (Editar) - sem margem à esquerda */
+#lista li button:first-of-type {
+    margin-left: 0;
+}
+
+/* Botão Editar */
+#lista li button:first-of-type {
+    background: linear-gradient(135deg, #00d2ff 0%, #3a7bd5 100%);
+    min-width: 90px; /* Largura mínima */
+}
+
+#lista li button:first-of-type:hover {
+    background: linear-gradient(135deg, #00b8e6 0%, #2e6ab8 100%);
+    transform: translateY(-2px);
+}
+
+/* Botão Remover */
+#lista li button:last-of-type {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+    min-width: 90px; /* Largura mínima */
+}
+
+#lista li button:last-of-type:hover {
+    background: linear-gradient(135deg, #ee5a24 0%, #ff6b6b 100%);
+    transform: translateY(-2px);
+}
+
+/* Efeito de clique nos botões */
+#lista li button:active {
+    transform: translateY(1px);
+}
+
+/* ========== TAREFA CONCLUÍDA ========== */
+.concluida {
+    text-decoration: line-through;
+    background: linear-gradient(135deg, rgba(0, 210, 255, 0.1) 0%, rgba(108, 99, 255, 0.1) 100%);
+    color: rgba(255, 255, 255, 0.5) !important;
+    border-radius: 8px;
+}
+
+/* ========== ANIMAÇÕES ========== */
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ========== SCROLLBAR ========== */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--fiap-dark);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--fiap-gradient);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--fiap-gradient-hover);
+}
