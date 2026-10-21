@@ -1,4 +1,4 @@
-/* ========== VARIÁVEIS DE ESTILO ========== */
+/* Variáveis de estilo */
 :root {
     --fiap-black: #0a0a0a;
     --fiap-dark: #0f0f1a;
@@ -13,14 +13,14 @@
     --border-radius-fiap-sm: 12px;
 }
 
-/* ========== RESET E CONFIGURAÇÕES GLOBAIS ========== */
+/* Reset e configurações globais */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* ========== FUNDO DA PÁGINA ========== */
+/* Fundo da página */
 body {
     font-family: 'Inter', 'Segoe UI', 'Poppins', sans-serif;
     min-height: 100vh;
@@ -46,7 +46,7 @@ body::before {
     pointer-events: none;
 }
 
-/* ========== CONTAINER PRINCIPAL ========== */
+/* Container principal */
 .minhaLista {
     max-width: 600px;
     width: 100%;
@@ -66,7 +66,7 @@ body::before {
     box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.6);
 }
 
-/* ========== TÍTULO ========== */
+/* Título */
 .titulo {
     text-align: center;
     margin-bottom: 35px;
@@ -78,9 +78,9 @@ body::before {
     color: transparent;
 }
 
-/* ========== INPUT E BOTÃO ADICIONAR ========== */
+/* Campo de texto */
 #meuInput {
-    width: calc(100% - 130px); /* Ajusta largura considerando o botão */
+    width: calc(100% - 130px);
     padding: 16px 20px;
     background: rgba(15, 15, 26, 0.8);
     border: 2px solid rgba(108, 99, 255, 0.3);
@@ -88,7 +88,7 @@ body::before {
     font-size: 16px;
     color: #fff;
     transition: all 0.3s ease;
-    margin-right: 12px; /* Espaço entre input e botão */
+    margin-right: 12px;
 }
 
 #meuInput::placeholder {
@@ -102,11 +102,11 @@ body::before {
     background: rgba(15, 15, 26, 1);
 }
 
-/* Botão Adicionar */
+/* Botão adicionar */
 button[onclick="adicionar()"] {
     padding: 16px 10px;
     background: linear-gradient(135deg, #00d2ff 0%, #3a7bd5 100%);
-    min-width: 90px; /* Largura mínima */
+    min-width: 90px;
     color: black;
     border: none;
     border-radius: 50px;
@@ -117,7 +117,7 @@ button[onclick="adicionar()"] {
     letter-spacing: 1.5px;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: 0 4px 15px rgba(108, 99, 255, 0.3);
-    vertical-align: top; /* Alinha com o input */
+    vertical-align: top;
 }
 
 button[onclick="adicionar()"]:hover {
@@ -126,13 +126,13 @@ button[onclick="adicionar()"]:hover {
     background: var(--fiap-gradient-hover);
 }
 
-/* ========== LISTA DE TAREFAS ========== */
+/* Lista de tarefas */
 #lista {
     list-style: none;
     margin-top: 30px;
 }
 
-/* Cada item da lista */
+/* Item da lista */
 #lista li {
     background: linear-gradient(135deg, rgba(26, 26, 46, 0.9) 0%, rgba(15, 15, 26, 0.9) 100%);
     margin: 15px 0;
@@ -147,7 +147,7 @@ button[onclick="adicionar()"]:hover {
     position: relative;
 }
 
-/* Barra lateral ao passar mouse */
+/* Barra lateral ao passar o mouse */
 #lista li::before {
     content: '';
     position: absolute;
@@ -164,7 +164,6 @@ button[onclick="adicionar()"]:hover {
     transform: scaleY(1);
 }
 
-/* Efeito hover no item */
 #lista li:hover {
     transform: translateX(8px);
     border-color: rgba(108, 99, 255, 0.5);
@@ -177,7 +176,7 @@ button[onclick="adicionar()"]:hover {
     font-size: 16px;
     font-weight: 500;
     color: #fff;
-    cursor: pointer; /* Indica que pode clicar para concluir */
+    cursor: pointer;
     padding: 5px;
     transition: all 0.2s ease;
 }
@@ -187,10 +186,9 @@ button[onclick="adicionar()"]:hover {
     padding-left: 10px;
 }
 
-/* ========== BOTÕES DE EDITAR E REMOVER ========== */
-/* ESTILO PARA AMBOS OS BOTÕES */
+/* Botões de editar e remover */
 #lista li button {
-    padding: 10px 24px; /* Aumentado o padding horizontal */
+    padding: 10px 24px;
     border: none;
     border-radius: 50px !important;
     cursor: pointer;
@@ -199,19 +197,18 @@ button[onclick="adicionar()"]:hover {
     text-transform: uppercase;
     letter-spacing: 1px;
     transition: all 0.3s ease;
-    margin-left: 15px; /* ESPAÇO ENTRE OS BOTÕES - MUDE AQUI */
+    margin-left: 15px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* Primeiro botão (Editar) - sem margem à esquerda */
 #lista li button:first-of-type {
     margin-left: 0;
 }
 
-/* Botão Editar */
+/* Botão editar */
 #lista li button:first-of-type {
     background: linear-gradient(135deg, #00d2ff 0%, #3a7bd5 100%);
-    min-width: 90px; /* Largura mínima */
+    min-width: 90px;
 }
 
 #lista li button:first-of-type:hover {
@@ -219,10 +216,10 @@ button[onclick="adicionar()"]:hover {
     transform: translateY(-2px);
 }
 
-/* Botão Remover */
+/* Botão remover */
 #lista li button:last-of-type {
     background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
-    min-width: 90px; /* Largura mínima */
+    min-width: 90px;
 }
 
 #lista li button:last-of-type:hover {
@@ -235,7 +232,7 @@ button[onclick="adicionar()"]:hover {
     transform: translateY(1px);
 }
 
-/* ========== TAREFA CONCLUÍDA ========== */
+/* Tarefa concluída */
 .concluida {
     text-decoration: line-through;
     background: linear-gradient(135deg, rgba(0, 210, 255, 0.1) 0%, rgba(108, 99, 255, 0.1) 100%);
@@ -243,7 +240,7 @@ button[onclick="adicionar()"]:hover {
     border-radius: 8px;
 }
 
-/* ========== ANIMAÇÕES ========== */
+/* Animações */
 @keyframes slideInUp {
     from {
         opacity: 0;
@@ -255,7 +252,7 @@ button[onclick="adicionar()"]:hover {
     }
 }
 
-/* ========== SCROLLBAR ========== */
+/* Barra de rolagem */
 ::-webkit-scrollbar {
     width: 10px;
 }
